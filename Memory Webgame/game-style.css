@@ -1,0 +1,71 @@
+.card-grid {
+    display: grid;
+    gap: 10px;
+    justify-items: center;
+    align-items: center;  
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 90%;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); 
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: #6200ea;
+    border: 2px solid #3700b3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.card.flipped {
+    background-color: #fff;
+    color: #6200ea;
+    transform: rotateY(180deg);
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+button#back-home {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #6200ea;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button#back-home:hover {
+    background-color: #3700b3;
+}
+
+#timer {
+    font-size: 20px;
+    font-weight: bold;
+    color: #6200ea;
+}
+
+@media (min-width: 600px) {
+    .card-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
+
+@media (max-width: 599px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
