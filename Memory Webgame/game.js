@@ -35,8 +35,8 @@ function generateCards(level) {
     matchedPairs = 0; // Reset matched pairs for the new level
     timeRemaining = 120; // Reset timer to 2 minutes
 
-    // Start the timer
-    startTimer();
+    // Stop any running timer before starting a new one
+    clearInterval(timerInterval);
 
     // Dynamically set grid columns based on the number of cards
     const columns = Math.ceil(Math.sqrt(numCards));
@@ -55,10 +55,18 @@ function generateCards(level) {
         const card = document.createElement('div');
         card.classList.add('card');
         card.dataset.value = value;
-        card.innerText = '?'; // Hidden state
-        card.addEventListener('click', flipCard);
+        card.innerText = value; // Show card initially
         cardGrid.appendChild(card);
     });
+
+    // Show cards for 3 seconds before hiding them
+    setTimeout(() => {
+        document.querySelectorAll('.card').forEach(card => {
+            card.innerText = '?'; // Hide card value
+            card.addEventListener('click', flipCard); // Add click event
+        });
+        startTimer(); // Start the timer after cards are hidden
+    }, 1000);
 }
 
 // Function to handle card flipping
@@ -116,13 +124,8 @@ function startTimer() {
             timerDisplay.innerText = `Time: ${formatTime(timeRemaining)}`;
         } else {
             clearInterval(timerInterval); // Stop the timer when it reaches 0
-            alert("Time's up! Moving to the next level.");
-            if (level < 5) {
-                level++;
-                generateCards(level);
-            } else {
-                alert("Game over. You've completed all levels!");
-            }
+            alert("Game over. You've run out of time!");
+            window.location.href = 'index.html'; // Navigate back to home
         }
     }, 1000);
 }
