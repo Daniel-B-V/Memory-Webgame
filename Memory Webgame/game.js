@@ -35,7 +35,7 @@ const pokemonImages = [
     'chikorita.png',
     'treecko.png',
     'mudkip.png',
-    'torchick.png'
+    'torchic.png'
 ];
 
 // Function to generate cards dynamically
