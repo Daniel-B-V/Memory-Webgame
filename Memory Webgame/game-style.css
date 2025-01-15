@@ -1,13 +1,12 @@
 .card-grid {
     display: grid;
-    gap: 10px;
-    justify-items: center;
-    align-items: center;  
-    margin: 20px auto;
-    padding: 10px;
-    max-width: 90%;
-    width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); 
+    gap: 10px; /* Adjust spacing between cards */
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .card {
@@ -18,11 +17,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 20px;
     color: #fff;
     cursor: pointer;
-    border-radius: 5px;
-    transition: transform 0.3s ease;
+    border-radius: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    overflow: hidden; /* Ensure the image stays within the card boundaries */
+}
+
+.card img {
+    max-width: 90%; /* Adjust image to fit within the card */
+    max-height: 90%; /* Ensure the image doesn't overflow vertically */
+    object-fit: contain; /* Maintain aspect ratio while fitting the image inside the card */
+    display: none; /* Initially hide the image */
 }
 
 .card.flipped {
@@ -36,6 +43,14 @@
     justify-content: space-between;
     align-items: center;
     margin: 20px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Center vertically within the screen */
 }
 
 button#back-home {
