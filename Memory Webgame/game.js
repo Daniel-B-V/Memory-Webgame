@@ -46,64 +46,65 @@ function generateCards(level) {
         return;
     }
 
-    cardGrid.innerHTML = ''; // Clear previous cards
-    matchedPairs = 0; // Reset matched pairs
-    timeRemaining = 120; // Reset timer
+    // Reset card grid and styles
+    cardGrid.innerHTML = '';
+    cardGrid.className = 'card-grid'; // Clear previous level classes
 
-    clearInterval(timerInterval); // Stop any ongoing timer
+    // Add level-specific class
+    cardGrid.classList.add(`level-${level}`);
+
+    matchedPairs = 0;
+    timeRemaining = 120;
+
+    clearInterval(timerInterval);
 
     const cards = [];
     for (let i = 0; i < numCards / 2; i++) {
-        const randomPokemon = pokemonImages[i % pokemonImages.length]; // Loop through the images if there are more cards than images
-        cards.push(randomPokemon, randomPokemon); // Create pairs of the same image
+        const randomPokemon = pokemonImages[i % pokemonImages.length];
+        cards.push(randomPokemon, randomPokemon);
     }
 
-    // Shuffle cards
     cards.sort(() => Math.random() - 0.5);
 
-    // Calculate grid dimensions (equal rows and columns)
+    // Set grid dimensions dynamically
     const dimension = Math.ceil(Math.sqrt(numCards));
     cardGrid.style.gridTemplateColumns = `repeat(${dimension}, 1fr)`;
     cardGrid.style.gridTemplateRows = `repeat(${dimension}, 1fr)`;
 
-    // Create card elements
     cards.forEach(image => {
         const card = document.createElement('div');
         card.classList.add('card');
         card.dataset.image = image;
 
-        // Create an img element for the card image
         const img = document.createElement('img');
-        img.src = `images/${image}`; // Use the image filename from the card data
-        img.alt = image.split('.')[0]; // Set the alt text as the name of the Pokémon
-        img.style.display = 'none'; // Hide image initially
+        img.src = `images/${image}`;
+        img.alt = image.split('.')[0];
+        img.style.display = 'none';
 
-        // Append the img to the card
         card.appendChild(img);
         cardGrid.appendChild(card);
     });
 
-    // Show cards briefly, then hide
     setTimeout(() => {
         document.querySelectorAll('.card').forEach(card => {
-            const img = card.firstChild; // Get the image inside the card
-            img.style.display = 'block'; // Show the image for 1.5 seconds
-            card.classList.add('flipped'); // Flip the card to reveal the image
+            const img = card.firstChild;
+            img.style.display = 'block';
+            card.classList.add('flipped');
         });
 
-        // After 1.5 seconds, hide images and add event listeners for flipping
         setTimeout(() => {
             document.querySelectorAll('.card').forEach(card => {
                 const img = card.firstChild;
-                img.style.display = 'none'; // Hide image again
-                card.classList.remove('flipped'); // Remove flip effect
-                card.addEventListener('click', flipCard); // Add click event to flip the card
+                img.style.display = 'none';
+                card.classList.remove('flipped');
+                card.addEventListener('click', flipCard);
             });
 
-            startTimer(); // Start the timer after cards are hidden
-        }, 1500); // Keep images visible for 1.5 seconds
-    }, 1500); // Display cards for 2 seconds
+            startTimer();
+        }, 1500);
+    }, 1500);
 }
+
 
 // Function to flip cards
 function flipCard() {
