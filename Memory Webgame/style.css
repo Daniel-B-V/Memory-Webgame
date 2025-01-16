@@ -1,23 +1,44 @@
+/* General styles */
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     margin: 0;
     padding: 0;
     background-color: #f4f4f9;
     color: #333;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
-    padding: 20px;
-    background-color: #6200ea;
-    color: #fff;
+    padding: 10px;
+    background-color: #000080;
+    color: #ffffff;
+    flex: 0 0 auto;
+    text-align: center;
 }
 
 main {
-    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1; 
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    color: white; 
 }
 
-/* Navbar styles */
+footer {
+    padding: 10px;
+    background-color: #000080;
+    color: #ffffff;
+    flex: 0 0 auto;
+    text-align: center;
+}
+
 .navbar {
     background-color: #000000;
     padding: 10px 20px;
@@ -47,30 +68,54 @@ main {
 }
 
 .navbar a:hover {
-    color: #ffde03;
+    color: #000080;
 }
 
+.content-box {
+    background-color: white; 
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    max-width: 400px;
+    margin: auto;
+    text-align: center; 
+    margin-top: 170px;
+}
 
 .username-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     margin: 20px 0;
+    flex-wrap: nowrap; 
+    width: 100%; 
 }
 
-input[type="text"] {
+.username-input label {
+    font-size: 16px; 
+    color: rgb(0, 0, 0); 
+    white-space: nowrap;
+}
+
+.username-input input[type="text"] {
     padding: 10px;
-    width: 60%;
-    max-width: 300px;
+    width: 40%;
+    max-width: 400px;
     font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .buttons {
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 button {
     padding: 10px 20px;
-    margin: 10px;
+    margin: 5px;
     font-size: 16px;
-    background-color: #6200ea;
+    background-color: #000080;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -79,15 +124,21 @@ button {
 }
 
 button:hover {
-    background-color: #3700b3;
+    background-color: #000080;
 }
 
-footer {
-    padding: 10px;
-    background-color: #6200ea;
-    color: #fff;
-    position: absolute;
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    bottom: 0;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
 }
 
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

@@ -50,9 +50,32 @@
 
 .game-info {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: center;
     margin: 20px;
+    width: 100%;
+    max-width: 800px; 
+}
+
+#timer {
+    font-size: 24px; 
+    font-weight: 700; 
+    color: #6200ea;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+}
+
+.game-info p {
+    font-size: 24px; 
+    font-weight: 700;
+    color: black; 
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+#current-score {
+    font-size: 24px; 
+    font-weight: 700; 
+    color: black;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
 }
 
 button#back-home {
@@ -67,12 +90,6 @@ button#back-home {
 
 button#back-home:hover {
     background-color: #3700b3;
-}
-
-#timer {
-    font-size: 20px;
-    font-weight: bold;
-    color: #6200ea;
 }
 
 @media (min-width: 600px) {
