@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game - Instructions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="instruction-style.css">
+</head>
+<body>
+    <header>
+        <h1>How to Play the Memory Game</h1>
+    </header>
+    <main>
+        <section class="instructions">
+            <h2>Game Rules</h2>
+            <ul>
+                <li>The game starts with a grid of face-down cards.</li>
+                <li>Your goal is to find all matching pairs of cards.</li>
+                <li>Click on a card to flip it over and reveal its value.</li>
+                <li>Flip two cards at a time. If they match, they stay flipped.</li>
+                <li>If the cards don't match, they will flip back after a short time.</li>
+                <li>Match all pairs to complete the level!</li>
+            </ul>
+        </section>
+        <section class="tips">
+            <h2>Tips and Tricks</h2>
+            <ul>
+                <li>Take your time to memorize the card positions.</li>
+                <li>Try to find matches in a logical sequence to avoid confusion.</li>
+                <li>Focus on one area of the grid at a time.</li>
+            </ul>
+        </section>
+        <div class="navigation-buttons">
+            <button id="back-home">Back to Home</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Memory Game</p>
+    </footer>
+    <script>
+        document.getElementById('back-home').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
