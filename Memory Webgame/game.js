@@ -7,11 +7,21 @@ document.getElementById('back-home').addEventListener('click', () => {
 const cardGrid = document.getElementById('card-grid');
 const scoreDisplay = document.getElementById('current-score');
 const timerDisplay = document.getElementById('timer');
+const levelCompletedPopup = document.getElementById('level-completed-popup');
+const totalScoreDisplay = document.getElementById('total-score');
+const nextLevelButton = document.getElementById('next-level');
+const retryLevelButton = document.getElementById('retry-level'); // Retry button
+const backHomePopupButton = document.getElementById('back-home-popup');
+const timesUpPopup = document.getElementById('times-up-popup');
+const totalTimeUpScoreDisplay = document.getElementById('total-time-up-score');
+const retryTimeUpButton = document.getElementById('retry-time-up');
+const backHomeTimeUpButton = document.getElementById('back-home-time-up');
+
 let score = 0;
 let flippedCards = [];
 let matchedPairs = 0;
 let timerInterval;
-let timeRemaining = 120; // 2 minutes
+let timeRemaining = 90; // 1:30 minute
 
 // Number of cards per level
 const levelCards = {
@@ -54,7 +64,7 @@ function generateCards(level) {
     cardGrid.classList.add(`level-${level}`);
 
     matchedPairs = 0;
-    timeRemaining = 120;
+    timeRemaining = 90;
 
     clearInterval(timerInterval);
 
@@ -101,10 +111,9 @@ function generateCards(level) {
             });
 
             startTimer();
-        }, 1500);
-    }, 1500);
+        }, 1000);
+    }, 1000);
 }
-
 
 // Function to flip cards
 function flipCard() {
@@ -132,12 +141,14 @@ function checkMatch() {
         matchedPairs++;
 
         if (matchedPairs === levelCards[level] / 2) {
-            // Proceed to the next level if all pairs are matched
-            setTimeout(() => {
-                alert(`Level ${level} completed!`);
-                level++; // Move to next level
-                generateCards(level); // Generate new cards
-            }, 500);
+            // Show the popup for level completion
+            clearInterval(timerInterval); // Stop the timer
+            totalScoreDisplay.innerText = score; // Update the total score
+            levelCompletedPopup.style.display = 'block';
+
+            // Apply the blur effect to the background content
+            document.querySelector('.game-info').classList.add('blur-background');
+            document.querySelector('.card-grid').classList.add('blur-background');
         }
 
         flippedCards = [];
@@ -151,6 +162,26 @@ function checkMatch() {
     }
 }
 
+// Event listener for the Next Level button
+nextLevelButton.addEventListener('click', () => {
+    level++; // Move to the next level
+    levelCompletedPopup.style.display = 'none'; // Hide the popup
+
+    // Remove the blur effect when going to next level
+    document.querySelector('.game-info').classList.remove('blur-background');
+    document.querySelector('.card-grid').classList.remove('blur-background');
+
+    generateCards(level); // Generate new cards
+});
+
+// Event listener for the Retry Level button
+retryLevelButton.addEventListener('click', () => {
+    levelCompletedPopup.style.display = 'none'; // Hide the popup
+    document.querySelector('.game-info').classList.remove('blur-background'); // Remove blur effect
+    document.querySelector('.card-grid').classList.remove('blur-background'); // Remove blur effect
+    generateCards(level); // Retry the current level
+});
+
 // Timer functionality
 function startTimer() {
     timerInterval = setInterval(() => {
@@ -159,7 +190,7 @@ function startTimer() {
             timerDisplay.innerText = `Time: ${formatTime(timeRemaining)}`;
         } else {
             clearInterval(timerInterval);
-            alert('Time’s up! Game over.');
+            showTimeUpPopup(); // Show the "Time's Up" popup when time runs out
         }
     }, 1000);
 }
@@ -171,5 +202,30 @@ function formatTime(seconds) {
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
 }
 
+function showTimeUpPopup() {
+    totalTimeUpScoreDisplay.innerText = score; // Display current score
+    timesUpPopup.style.display = 'block';
+
+    // Apply the blur effect to the background content
+    document.querySelector('.game-info').classList.add('blur-background');
+    document.querySelector('.card-grid').classList.add('blur-background');
+}
+
+// Event listener for Retry button
+retryTimeUpButton.addEventListener('click', () => {
+    timesUpPopup.style.display = 'none'; // Hide the popup
+    document.querySelector('.game-info').classList.remove('blur-background'); // Remove blur effect
+    document.querySelector('.card-grid').classList.remove('blur-background'); // Remove blur effect
+    generateCards(level); // Retry the current level
+});
+
+// Event listener for Back to Home button
+backHomeTimeUpButton.addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
+
+backHomePopupButton.addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
 // Start game
 generateCards(level);

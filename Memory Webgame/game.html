@@ -14,25 +14,29 @@
     </header>
     <main>
         <div class="game-info">
-            <p id="timer">Time: 02:00</p>
+            <p id="timer">Time: 01:30</p>
             <p>Current Score: <span id="current-score">0</span></p>
             <button id="back-home">Back to Home</button>
         </div>
         <div class="card-grid" id="card-grid">
-            <div class="card" data-value=""></div>
-            <div class="card" data-value=""></div>
-            <div class="card" data-value=""></div>
-            <div class="card" data-value=""></div>
-            <div class="card" data-value=""></div>
-            <div class="card" data-value=""></div>
-            <div class="card" data-value=""></div>
-            <div class="card" data-value=""></div>
-            <div class="card" data-value=""></div>
-            <div class="card" data-value=""></div>
-            <div class="card" data-value=""></div>
-            <div class="card" data-value=""></div>
         </div>
-        
+
+        <div id="popup-overlay"></div>
+        <div class="level-completed-popup" id="level-completed-popup" style="display: none;">
+            <h2>Level Completed!</h2>
+            <p>Total Score: <span id="total-score">0</span></p>
+            <button id="next-level">Next Level</button>
+            <button id="retry-level">Retry Level</button> 
+            <button id="back-home-popup">Go Back Home</button>
+        </div>
+
+        <div class="times-up-popup" id="times-up-popup" style="display: none;">
+            <h2>Time's Up!</h2>
+            <p>Total Score: <span id="total-time-up-score">0</span></p>
+            <button id="retry-time-up">Retry</button>
+            <button id="back-home-time-up">Back to Home</button>
+        </div>
+
     </main>
     <footer>
         <p>&copy; 2025 Memory Game</p>
