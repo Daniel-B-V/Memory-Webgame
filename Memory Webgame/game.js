@@ -16,6 +16,8 @@ const timesUpPopup = document.getElementById('times-up-popup');
 const totalTimeUpScoreDisplay = document.getElementById('total-time-up-score');
 const retryTimeUpButton = document.getElementById('retry-time-up');
 const backHomeTimeUpButton = document.getElementById('back-home-time-up');
+const finalLevelPopup = document.getElementById('final-level-popup');
+const finalBackHomeButton = document.getElementById('final-back-home');
 
 let score = 0;
 let flippedCards = [];
@@ -52,7 +54,13 @@ const pokemonImages = [
 function generateCards(level) {
     const numCards = levelCards[level];
     if (!numCards) {
-        alert("Congratulations! You've completed all levels!");
+        // All levels completed
+        clearInterval(timerInterval); // Stop the timer
+        finalLevelPopup.style.display = 'block'; // Show final level popup
+
+        // Apply the blur effect to the background content
+        document.querySelector('.game-info').classList.add('blur-background');
+        document.querySelector('.card-grid').classList.add('blur-background');
         return;
     }
 
@@ -225,6 +233,10 @@ backHomeTimeUpButton.addEventListener('click', () => {
 });
 
 backHomePopupButton.addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
+
+finalBackHomeButton.addEventListener('click', () => {
     window.location.href = 'index.html';
 });
 // Start game
