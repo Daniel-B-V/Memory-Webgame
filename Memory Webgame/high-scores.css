@@ -1,0 +1,21 @@
+/* Make the content box background black */
+.content-box {
+    background-color: black; /* Set the background color to black */
+    color: white; /* Set the text color to white for contrast */
+    padding: 20px; /* Add padding to give it some space */
+    border-radius: 10px; /* Optional: Adds rounded corners to the box */
+}
+
+/* Set the table background to black */
+.high-scores-table {
+    background-color: black; /* Table background set to black */
+    color: white; /* Text color inside table set to white */
+    width: 100%; /* Make table width 100% for better responsiveness */
+}
+
+/* Set the text color inside the table to white */
+.high-scores-table td, .high-scores-table th {
+    color: white !important; /* Set text color inside table cells to white */
+    padding: 10px; /* Add some padding to the cells */
+    border: 1px solid #ddd; /* Optional: Add a light border for separation */
+}
