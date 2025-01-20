@@ -241,3 +241,30 @@ finalBackHomeButton.addEventListener('click', () => {
 });
 // Start game
 generateCards(level);
+
+// Save score, date, and time when the game ends
+function saveScore(score) {
+    const username = localStorage.getItem('username');
+    if (username) {
+        const datePlayed = new Date();
+        const gameData = {
+            username: username,
+            score: score,
+            date: datePlayed.toLocaleDateString(),
+            time: datePlayed.toLocaleTimeString()
+        };
+        
+        // Get existing scores from localStorage
+        let scores = JSON.parse(localStorage.getItem('highScores')) || [];
+        
+        // Add the new score
+        scores.push(gameData);
+        
+        // Save updated scores back to localStorage
+        localStorage.setItem('highScores', JSON.stringify(scores));
+    }
+}
+
+// Example usage: Save score when game ends (this is just a mock)
+saveScore(score);  
+

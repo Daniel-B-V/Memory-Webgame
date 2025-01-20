@@ -42,7 +42,15 @@
             </div>
         </div>
     </main>
-    
+
+    <!-- Modal for username input -->
+    <div id="popup-overlay"></div>
+    <div class="username-popup" id="username-popup" style="display: none;">
+        <h2>You must enter a username to play!</h2>
+        <input type="text" id="username-input" placeholder="Username">
+        <button id="submit-username">Submit</button>
+        <button id="back-home">Back to Homepage</button>
+    </div>
 
     <footer>
         <p>&copy; 2025 Memory Game</p>
@@ -50,5 +58,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
