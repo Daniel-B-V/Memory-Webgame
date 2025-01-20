@@ -73,7 +73,8 @@ footer {
     margin: 10px 0;
 }
 
-button {
+/* Homepage button styles */
+button.homepage-button {
     width: 300px; /* Fixed width */
     height: 100px; /* Fixed height */
     font-size: 30px; /* Adjust text size to fit */
@@ -89,6 +90,12 @@ button {
     justify-content: center; /* Center the text */
 }
 
+/* Hover effect for homepage buttons */
+button.homepage-button:hover {
+    background-color: #333;
+}
+
+/* Video background */
 .video-background {
     position: fixed;
     top: 0;
@@ -141,7 +148,8 @@ button {
     margin-top: 20px;
 }
 
-.modal button {
+/* Modal button styles */
+button.modal-button {
     padding: 10px 20px;
     background-color: #6200ea;
     color: white;
@@ -151,10 +159,12 @@ button {
     width: 48%;
 }
 
-.modal button:hover {
+/* Hover effect for modal buttons */
+button.modal-button:hover {
     background-color: #3700b3;
 }
 
+/* Close button */
 .close {
     position: absolute;
     top: 10px;
