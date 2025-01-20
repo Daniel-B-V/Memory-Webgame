@@ -125,13 +125,12 @@ function checkMatch() {
         scoreDisplay.innerText = score;
         matchedPairs++;
 
-            // For example, in checkMatch()
-    if (matchedPairs === levelCards[level] / 2) {
-        clearInterval(timerInterval);
-        totalScoreDisplay.innerText = score;
-        levelCompletedPopup.style.display = 'block';
-        endGame(); // Ensure this is called when the level is completed
-    }
+        if (matchedPairs === levelCards[level] / 2) {
+            clearInterval(timerInterval);
+            totalScoreDisplay.innerText = score;
+            levelCompletedPopup.style.display = 'block';
+            endGame(); // This will now save the score only once when the level is completed
+        }
 
         flippedCards = [];
     } else {
@@ -193,19 +192,24 @@ function saveScore(score) {
 
         let scores = JSON.parse(localStorage.getItem('highScores')) || [];
 
-        console.log('Before Saving:', scores);
+        // Remove any existing scores for the current user
+        scores = scores.filter(scoreEntry => scoreEntry.username !== username);
 
+        // Add the new score for the user
         scores.push(gameData);
 
+        // Sort scores by highest score first
         scores.sort((a, b) => b.score - a.score);
 
+        // Save the updated scores to localStorage
         localStorage.setItem('highScores', JSON.stringify(scores));
 
-        console.log('After Saving:', scores);
+        console.log('Scores saved:', scores);
     } else {
         console.log("No username found in localStorage.");
     }
 }
+
 
 document.getElementById('back-home').addEventListener('click', () => {
     window.location.href = 'index.html';
