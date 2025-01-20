@@ -1,45 +1,39 @@
-// Function to show a prompt asking the user to enter a username if not already set in localStorage
-function checkUsername() {
-    const username = localStorage.getItem('username');
-    if (!username) {
-        // Show the modal for username input
-        document.getElementById('popup-overlay').style.display = 'block';
-        document.getElementById('username-popup').style.display = 'block';
-        return false;  // Prevent further action until username is set
-    }
-    return true;
-}
+window.onload = function () {
+    // Handle Play Now button click
+    document.getElementById('play-now').addEventListener('click', function () {
+        document.getElementById('username-modal').style.display = 'flex';
+    });
 
-// Submit the username and save it in localStorage
-document.getElementById('submit-username').addEventListener('click', () => {
-    const enteredUsername = document.getElementById('username-input').value;
-    if (enteredUsername) {
-        localStorage.setItem('username', enteredUsername);
-        document.getElementById('username-popup').style.display = 'none'; // Hide the modal
-        window.location.href = 'game.html'; // Proceed to the game page
-    } else {
-        alert("You must enter a username to play!");
-    }
-});
+    // Handle Save Username button in the modal
+    document.getElementById('save-username').addEventListener('click', function () {
+        const usernameInput = document.getElementById('modal-username').value.trim();
+        const existingUsernames = JSON.parse(localStorage.getItem('usernames')) || [];
 
-// Back button event listener
-document.getElementById('back-home').addEventListener('click', () => {
-    window.location.href = 'index.html'; // Redirect to the homepage
-});
+        if (!usernameInput) {
+            alert('Please enter a valid username.');
+        } else if (existingUsernames.includes(usernameInput)) {
+            alert('Username is already taken. Please choose another one.');
+        } else {
+            existingUsernames.push(usernameInput);
+            localStorage.setItem('usernames', JSON.stringify(existingUsernames));
+            localStorage.setItem('currentUsername', usernameInput);
+            document.getElementById('username-modal').style.display = 'none';
+            window.location.href = 'game.html'; // Redirect to the game
+        }
+    });
 
-// Play Now button event listener
-document.getElementById('play-now').addEventListener('click', () => {
-    if (checkUsername()) {
-        // Redirect to the game page if a username is set
-        window.location.href = 'game.html';
-    }
-});
+    // Close modal if the user clicks the close button
+    document.querySelector('.close').addEventListener('click', function () {
+        document.getElementById('username-modal').style.display = 'none';
+    });
 
-// Other button listeners
-document.getElementById('high-scores').addEventListener('click', () => {
-    window.location.href = 'high-scores.html';
-});
+    // Redirect to High Scores
+    document.getElementById('high-scores').addEventListener('click', function () {
+        window.location.href = 'high-scores.html';
+    });
 
-document.getElementById('instructions').addEventListener('click', () => {
-    window.location.href = 'instructions.html';
-});
+    // Redirect to Instructions
+    document.getElementById('instructions').addEventListener('click', function () {
+        window.location.href = 'instructions.html';
+    });
+};
