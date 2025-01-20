@@ -1,5 +1,6 @@
 function displayHighScores() {
     const scores = JSON.parse(localStorage.getItem('highScores')) || [];
+    console.log('Scores Retrieved:', scores);
 
     scores.sort((a, b) => b.score - a.score);
 
@@ -18,9 +19,3 @@ function displayHighScores() {
         tableBody.appendChild(row);
     });
 }
-
-document.addEventListener('DOMContentLoaded', displayHighScores);
-
-document.getElementById('back-home').addEventListener('click', () => {
-    window.location.href = 'index.html';
-});
