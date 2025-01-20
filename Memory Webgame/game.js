@@ -1,29 +1,20 @@
-// Navigate back to the home page
-document.getElementById('back-home').addEventListener('click', () => {
-    window.location.href = 'index.html';
-});
-
-// Variables and DOM elements
 const cardGrid = document.getElementById('card-grid');
 const scoreDisplay = document.getElementById('current-score');
 const timerDisplay = document.getElementById('timer');
 const levelCompletedPopup = document.getElementById('level-completed-popup');
 const totalScoreDisplay = document.getElementById('total-score');
 const nextLevelButton = document.getElementById('next-level');
-const retryLevelButton = document.getElementById('retry-level'); // Retry button
-const backHomePopupButton = document.getElementById('back-home-popup');
+const retryLevelButton = document.getElementById('retry-level');
 const timesUpPopup = document.getElementById('times-up-popup');
 const totalTimeUpScoreDisplay = document.getElementById('total-time-up-score');
 const retryTimeUpButton = document.getElementById('retry-time-up');
-const backHomeTimeUpButton = document.getElementById('back-home-time-up');
 const finalLevelPopup = document.getElementById('final-level-popup');
-const finalBackHomeButton = document.getElementById('final-back-home');
 
 let score = 0;
 let flippedCards = [];
 let matchedPairs = 0;
 let timerInterval;
-let timeRemaining = 90; // 1:30 minute
+let timeRemaining = 90; // 1:30 minutes
 
 // Number of cards per level
 const levelCards = {
@@ -36,7 +27,6 @@ const levelCards = {
 
 let level = 1; // Start at level 1
 
-// List of Pokémon image filenames
 const pokemonImages = [
     'bulbasaur.png',
     'charmander.png',
@@ -54,26 +44,17 @@ const pokemonImages = [
 function generateCards(level) {
     const numCards = levelCards[level];
     if (!numCards) {
-        // All levels completed
-        clearInterval(timerInterval); // Stop the timer
-        finalLevelPopup.style.display = 'block'; // Show final level popup
-
-        // Apply the blur effect to the background content
-        document.querySelector('.game-info').classList.add('blur-background');
-        document.querySelector('.card-grid').classList.add('blur-background');
+        clearInterval(timerInterval);
+        finalLevelPopup.style.display = 'block';
         return;
     }
 
-    // Reset card grid and styles
     cardGrid.innerHTML = '';
-    cardGrid.className = 'card-grid'; // Clear previous level classes
-
-    // Add level-specific class
+    cardGrid.className = 'card-grid';
     cardGrid.classList.add(`level-${level}`);
 
     matchedPairs = 0;
     timeRemaining = 90;
-
     clearInterval(timerInterval);
 
     const cards = [];
@@ -84,7 +65,6 @@ function generateCards(level) {
 
     cards.sort(() => Math.random() - 0.5);
 
-    // Set grid dimensions dynamically
     const dimension = Math.ceil(Math.sqrt(numCards));
     cardGrid.style.gridTemplateColumns = `repeat(${dimension}, 1fr)`;
     cardGrid.style.gridTemplateRows = `repeat(${dimension}, 1fr)`;
@@ -123,14 +103,12 @@ function generateCards(level) {
     }, 1000);
 }
 
-// Function to flip cards
 function flipCard() {
     if (this.classList.contains('flipped') || flippedCards.length === 2) return;
 
     this.classList.add('flipped');
-    
-    const img = this.firstChild; // Get the image element inside the card
-    img.style.display = 'block'; // Show the image when the card is flipped
+    const img = this.firstChild;
+    img.style.display = 'block';
 
     flippedCards.push(this);
 
@@ -139,7 +117,6 @@ function flipCard() {
     }
 }
 
-// Function to check for a match
 function checkMatch() {
     const [card1, card2] = flippedCards;
 
@@ -149,48 +126,38 @@ function checkMatch() {
         matchedPairs++;
 
         if (matchedPairs === levelCards[level] / 2) {
-            // Show the popup for level completion
-            clearInterval(timerInterval); // Stop the timer
-            totalScoreDisplay.innerText = score; // Update the total score
+            clearInterval(timerInterval);
+            totalScoreDisplay.innerText = score;
             levelCompletedPopup.style.display = 'block';
-
-            // Apply the blur effect to the background content
-            document.querySelector('.game-info').classList.add('blur-background');
-            document.querySelector('.card-grid').classList.add('blur-background');
+            endGame(); // This will now save the score only once when the level is completed
         }
 
         flippedCards = [];
     } else {
-        // Reset unmatched cards
         card1.classList.remove('flipped');
-        card1.firstChild.style.display = 'none'; // Hide the image again
+        card1.firstChild.style.display = 'none';
         card2.classList.remove('flipped');
-        card2.firstChild.style.display = 'none'; // Hide the image again
+        card2.firstChild.style.display = 'none';
         flippedCards = [];
     }
 }
 
-// Event listener for the Next Level button
 nextLevelButton.addEventListener('click', () => {
-    level++; // Move to the next level
-    levelCompletedPopup.style.display = 'none'; // Hide the popup
-
-    // Remove the blur effect when going to next level
-    document.querySelector('.game-info').classList.remove('blur-background');
-    document.querySelector('.card-grid').classList.remove('blur-background');
-
-    generateCards(level); // Generate new cards
+    level++;
+    levelCompletedPopup.style.display = 'none';
+    generateCards(level);
 });
 
-// Event listener for the Retry Level button
 retryLevelButton.addEventListener('click', () => {
-    levelCompletedPopup.style.display = 'none'; // Hide the popup
-    document.querySelector('.game-info').classList.remove('blur-background'); // Remove blur effect
-    document.querySelector('.card-grid').classList.remove('blur-background'); // Remove blur effect
-    generateCards(level); // Retry the current level
+    levelCompletedPopup.style.display = 'none';
+    generateCards(level);
 });
 
-// Timer functionality
+retryTimeUpButton.addEventListener('click', () => {
+    timesUpPopup.style.display = 'none';
+    generateCards(level);
+});
+
 function startTimer() {
     timerInterval = setInterval(() => {
         if (timeRemaining > 0) {
@@ -198,53 +165,22 @@ function startTimer() {
             timerDisplay.innerText = `Time: ${formatTime(timeRemaining)}`;
         } else {
             clearInterval(timerInterval);
-            showTimeUpPopup(); // Show the "Time's Up" popup when time runs out
+            timesUpPopup.style.display = 'block';
         }
     }, 1000);
 }
 
-// Format time as mm:ss
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
 }
 
-function showTimeUpPopup() {
-    totalTimeUpScoreDisplay.innerText = score; // Display current score
-    timesUpPopup.style.display = 'block';
-
-    // Apply the blur effect to the background content
-    document.querySelector('.game-info').classList.add('blur-background');
-    document.querySelector('.card-grid').classList.add('blur-background');
-}
-
-// Event listener for Retry button
-retryTimeUpButton.addEventListener('click', () => {
-    timesUpPopup.style.display = 'none'; // Hide the popup
-    document.querySelector('.game-info').classList.remove('blur-background'); // Remove blur effect
-    document.querySelector('.card-grid').classList.remove('blur-background'); // Remove blur effect
-    generateCards(level); // Retry the current level
-});
-
-// Event listener for Back to Home button
-backHomeTimeUpButton.addEventListener('click', () => {
-    window.location.href = 'index.html';
-});
-
-backHomePopupButton.addEventListener('click', () => {
-    window.location.href = 'index.html';
-});
-
-finalBackHomeButton.addEventListener('click', () => {
-    window.location.href = 'index.html';
-});
-// Start game
 generateCards(level);
 
-// Save score, date, and time when the game ends
 function saveScore(score) {
-    const username = localStorage.getItem('username');
+    const username = localStorage.getItem('currentUsername'); // Retrieve the current username
+    console.log("Saving score for username:", username); // Log the username
     if (username) {
         const datePlayed = new Date();
         const gameData = {
@@ -253,18 +189,44 @@ function saveScore(score) {
             date: datePlayed.toLocaleDateString(),
             time: datePlayed.toLocaleTimeString()
         };
-        
-        // Get existing scores from localStorage
+
         let scores = JSON.parse(localStorage.getItem('highScores')) || [];
-        
-        // Add the new score
+
+        // Remove any existing scores for the current user
+        scores = scores.filter(scoreEntry => scoreEntry.username !== username);
+
+        // Add the new score for the user
         scores.push(gameData);
-        
-        // Save updated scores back to localStorage
+
+        // Sort scores by highest score first
+        scores.sort((a, b) => b.score - a.score);
+
+        // Save the updated scores to localStorage
         localStorage.setItem('highScores', JSON.stringify(scores));
+
+        console.log('Scores saved:', scores);
+    } else {
+        console.log("No username found in localStorage.");
     }
 }
 
-// Example usage: Save score when game ends (this is just a mock)
-saveScore(score);  
+document.getElementById('back-home').addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
 
+document.getElementById('back-home-popup').addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
+
+document.getElementById('back-home-time-up').addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
+
+document.getElementById('final-back-home').addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
+
+function endGame() {
+    clearInterval(timerInterval);
+    saveScore(score); // Save the current score
+}

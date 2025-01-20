@@ -43,7 +43,7 @@ body {
 
 .tips h2 {
     margin-top: 20px;
-    color: black; 
+    color: white; 
     font-family: 'Verdana', sans-serif; 
 }
 
@@ -56,7 +56,7 @@ body {
 .tips li {
     margin-bottom: 10px;
     font-size: 18px;
-    color: black; 
+    color: white; 
     font-family: 'Verdana', sans-serif;
 }
 
