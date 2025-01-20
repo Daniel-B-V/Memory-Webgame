@@ -27,6 +27,11 @@ window.onload = function () {
         document.getElementById('username-modal').style.display = 'none';
     });
 
+    // Handle Back button to close the modal
+    document.getElementById('back-button').addEventListener('click', function () {
+        document.getElementById('username-modal').style.display = 'none';
+    });
+
     // Redirect to High Scores
     document.getElementById('high-scores').addEventListener('click', function () {
         window.location.href = 'high-scores.html';

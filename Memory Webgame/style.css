@@ -22,12 +22,12 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 1; 
+    flex: 1;
     padding: 20px;
     box-sizing: border-box;
     position: relative;
     z-index: 1;
-    color: white; 
+    color: white;
 }
 
 footer {
@@ -74,10 +74,16 @@ footer {
 }
 
 button {
+<<<<<<< HEAD
     width: 300px; /* Fixed width */
     height: 100px; /* Fixed height */
     font-size: 30px; /* Adjust text size to fit */
     margin: 20px 0;
+=======
+    padding: 20px 40px;
+    margin: 15px 0;
+    font-size: 20px;
+>>>>>>> d3a2f95af8b6d8250a1d234081df9cbfe6eeafec
     background-color: black;
     border: 2px solid #ddd;
     color: #fff;
@@ -121,10 +127,10 @@ button {
 
 .modal-content {
     background-color: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     text-align: center;
-    width: 300px;
+    width: 400px;
 }
 
 .modal input {
@@ -135,6 +141,12 @@ button {
     border-radius: 5px;
 }
 
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
 .modal button {
     padding: 10px 20px;
     background-color: #6200ea;
@@ -142,6 +154,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 48%;
 }
 
 .modal button:hover {
