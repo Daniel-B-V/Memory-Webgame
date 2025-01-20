@@ -74,16 +74,10 @@ footer {
 }
 
 button {
-<<<<<<< HEAD
     width: 300px; /* Fixed width */
     height: 100px; /* Fixed height */
     font-size: 30px; /* Adjust text size to fit */
     margin: 20px 0;
-=======
-    padding: 20px 40px;
-    margin: 15px 0;
-    font-size: 20px;
->>>>>>> d3a2f95af8b6d8250a1d234081df9cbfe6eeafec
     background-color: black;
     border: 2px solid #ddd;
     color: #fff;
