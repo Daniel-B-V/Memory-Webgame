@@ -196,6 +196,48 @@ button#back-home:hover {
     display: none; 
 }
 
+.final-level-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 2px solid #6200ea;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+    z-index: 1000;
+    width: 300px;
+}
+
+.final-level-popup h2 {
+    color: #6200ea;
+    margin-bottom: 10px;
+}
+
+.final-level-popup p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.final-level-popup button {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    font-size: 16px;
+    background-color: #6200ea;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.final-level-popup button:hover {
+    background-color: #3700b3;
+}
+
+
 @media (min-width: 600px) {
     .card-grid {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
